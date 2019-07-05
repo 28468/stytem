@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img {
+            width: 100px;
+            height: 100px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // Promise加载图片
+        var loadImg = (url) => {
+            return new Promise((resolve, reject) => {
+                // 创建图片
+                var img = new Image()
+                // 加载成功
+                img.onload = () => {
+                    resolve(img)
+                }
+                // 图片加载
+                img.onerror = () => {
+                    reject(new Error('图片加载失败'))
+                }
+                img.src = url
+            })
+        }
+        var imgs = ["http://pic37.nipic.com/20140113/8800276_184927469000_2.png",
+            "http://pic25.nipic.com/20121205/10197997_003647426000_2.jpg",
+            "http://pic39.nipic.com/20140321/18063302_210604412116_2.jpg",
+            "http://pic27.nipic.com/20130305/9252150_153617685375_2.jpg",
+            "http://pic26.nipic.com/20121221/9252150_142515375000_2.jpg",
+            "http://pic41.nipic.com/20140514/5295460_234432363121_2.jpg",
+            "http://pic21.nipic.com/20120527/2303038_180937676129_2.jpg",
+            "http://pic23.nipic.com/20120810/5736735_162511503170_2.jpg",
+            "http://pic37.nipic.com/20140105/15166348_202320428000_2.jpg",
+            "http://pic37.nipic.com/20140105/15166348_202320428000_2.jpg"
+        ]
+        // 串行加载
+        var ImgAsync = async (imgs) => {
+            for (var i = 0; i < imgs.length; i++) {
+                let img = await loadImg(imgs[i])
+                document.body.appendChild(img)
+            }
+        }
+        ImgAsync(imgs)
+    </script>
+    </script>
+</body>
+
+</html>

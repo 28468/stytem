@@ -1,0 +1,63 @@
+:global{
+     
+  .login-form {
+    position: fixed;
+    left: 60%;
+    top:20%;
+    width: 400px;
+    height: 320px;
+    background: #ffffff;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+   .inputOne{
+      margin: 0 auto;
+      text-align: center;
+      justify-content: space-between;
+      margin-top: 40px;
+      input{
+          width: 358px;
+          height: 40px;
+          color: #000;
+      }
+    
+    }
+    .inputTwo{
+      margin: 0 auto;
+      text-align: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      input{
+          width: 358px;
+          height: 40px;
+      }
+    
+    }
+    .title{
+        width: 100;
+        padding: 0 15px;
+        margin-top: 20px;
+       
+    }
+    .login-form-button{
+       width: 358px;
+       height: 40px;
+       margin-top: 20px;
+       margin-left: 10px;
+     }
+  
+  }
+  .login-form-forgot {
+    float: right;
+  }
+  .login-form-button {
+    width: 90%;
+    
+  }
+
+}
+.wrap{
+  width: 100%;
+  height: 100%;
+  background:#000080;
+}

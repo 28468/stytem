@@ -1,8 +1,8 @@
-import {login} from '../services/index'
+import {find} from '../services/index'
 
 export default {
   // 命名空间
-  namespace: 'login',
+  namespace: 'find',
 
   // 模块的状态
   state: {
@@ -11,14 +11,9 @@ export default {
 
   // 异步操作
   effects: {
-    *login({ payload, type }, {call, put}){
+    *find({ payload, type }, {call, put}){
       console.log('payload...', payload, type)
-      let data = yield call(login, payload);
-      // 调用reduce改变登陆状态
-      yield put({
-        type: 'updateLogin',
-        payload: data.code==1
-      })
+     
     }
   },
 

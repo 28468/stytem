@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: 'http://169.254.32.9:7001/',
+  baseURL: 'http://169.254.12.9:7001/',
   // withCredentials: true, // 跨域请求时发送 cookies
   timeout: 5000 // request timeout
 })

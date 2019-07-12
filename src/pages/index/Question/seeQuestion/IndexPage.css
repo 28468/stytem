@@ -25,13 +25,14 @@
      padding: 20px 0 0 20px;
      display: flex;
  }
- .radio div span{
-     margin-left: 15px;
+ .radio p{
+     width: 80px;
  }
+ 
  .select{
     width: 100%;
     height: 80px;
-    padding: 20px 0 0 20px;
+    padding: 40px 0 0 20px;
     display: flex;
  }
  .find p{
@@ -109,4 +110,10 @@
      top: 46%;
      color: #1890FF;
      font-size: 14px;
+ }
+ .subject{
+     display: flex;;
+ }
+ .subject span{
+     margin: 0 5px 0 5px;
  }

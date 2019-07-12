@@ -1,6 +1,6 @@
 import React from "react";
-import { Router, Route, Switch,Redirect } from "dva/router";
-import IndexPage from "./pages/IndexPage";
+import { Router, Route, Switch } from "dva/router";
+
 import LoginPage from "./pages/login/IndexPage";
 import ListPage from "./pages/index/IndexPage";
 

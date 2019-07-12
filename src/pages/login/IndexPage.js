@@ -1,28 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { routerRedux } from 'dva/router'
+import React, { useEffect,} from "react";
+
 import { connect } from "dva";
-import { Form, Icon, Input, Button, Checkbox } from "antd";
-import styles from "./IndexPage.scss";
+import { Form, Icon, Input, Button, Checkbox ,message} from "antd";
+import "./IndexPage.scss";
 
 function IndexPage(props) {
   console.log(props);
-  useEffect(() => {
-    console.log("执行useEffect");
-    props.login({ user_name: "chenmanjie", user_pwd: "Chenmanjie123!" });
-  }, []);
-
-  let handleSubmit = () => {
-    props.form.validateFields((err, values) => {
-      if (!err) {
-        props.login({ user_name: values.username, user_pwd: values.password})
-        props.history.push("/")
-
-        console.log(props)
-        console.log('Received values of form: ', values);
-      }
-
-    });
+ 
+// 判断是否登陆成功
+useEffect(() => {
+  if (props.isLogin === 1) {
+    message.success('登陆成功');
+    let path = '/';
+    if (props.location.search) {
+      path = decodeURIComponent(props.location.search.split('=')[1]);
+    }
+    props.history.push(path);
+  } else if (props.isLogin === 0) {
+    message.error('用户名或密码错误');
   }
+}, [props.isLogin]);
+//处理表单提交
+let handleSubmit = () => {
+  props.form.validateFields((err, values) => {
+    if (!err) {
+      props.login({ user_name: values.username, user_pwd: values.password });
+    }
+  });
+};
   const { getFieldDecorator } = props.form;
   return (
     <div className="login-page">
@@ -78,18 +83,19 @@ function IndexPage(props) {
 
 IndexPage.propTypes = {};
 
-const mapStateToProps = state => {
-  return { ...state.login };
-};
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state=>{
+  return {...state.login}
+}
+const mapDispatchToPorps = dispatch=>{
   return {
-    login: payload => {
+    login: payload=>{
       dispatch({
-        type: "login/login",
+        type: 'login/login',
         payload
-      });
+      })
     }
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Form.create()(IndexPage))
+
+export default connect(mapStateToProps, mapDispatchToPorps)(Form.create()(IndexPage));

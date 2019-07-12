@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "dva";
-import styles from "./IndexPage.scss";
+import "./IndexPage.scss";
 import { Switch, Route, NavLink } from "dva/router";
 import AddPage from "./Question/addQuestion/IndexPage";
 import ClassPage from "./Question/classQuestion/IndexPage";
@@ -13,9 +13,9 @@ import Class from './Class/Class'
 import Classroom from './Class/Classroom'
 import Students from './Class/Students'
 import WaitClass from './Read/waitClass'
-
+import Detail from '../index/Question/seeQuestion/detail'
 import { Layout, Menu, Icon } from "antd";
-const { Header, Content,  Sider } = Layout;
+const { Content,  Sider } = Layout;
 const { SubMenu } = Menu;
 
 function IndexPage() {
@@ -130,6 +130,7 @@ function IndexPage() {
                 <Route path="/classroom" component={Classroom} />
                 <Route path="/students" component={Students} />
                 <Route path="/waitClass" component={WaitClass} />
+                <Route path="/detail/:id" component={Detail} />
               </Switch>     
           </Content>
         </Layout>

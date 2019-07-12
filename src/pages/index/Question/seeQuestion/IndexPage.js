@@ -1,108 +1,162 @@
 import React, { useEffect } from 'react';
 import { connect } from 'dva';
 import styles from './IndexPage.css';
-import { Select } from 'antd';
+import { Select, Radio } from 'antd';
+import { Link } from "dva/router";
 const { Option } = Select;
 function handleChange(value) {
-  console.log(`selected ${value}`);
+	var value1 = `selected ${value}`
+}
+function onChange(e) {
+	console.log(`radio checked:${e.target.value}`);
 }
 function IndexPage(props) {
-  const typeList = [
-    { title: "JavaScript上", flag: true },
-    { title: "JavaScript下", flag: false },
-    { title: "模块化开发", flag: false },
-    { title: "移动端开发", flag: false },
-    { title: "node基础", flag: false },
-    { title: "组件化开发", flag: false },
-    { title: "渐进式开发", flag: false },
-    { title: "项目实战", flag: false },
-    { title: "JavaScript高级", flag: false },
-    { title: "node高级", flag: false },
-  ]
-  useEffect(() => {
-    console.log(props)
-  }, []);
-  return (
-    <div className={styles.wrap}>
-      <div className={styles.top}>
-        <h2>查看试题</h2>
-      </div>
-      <div className={styles.head}>
-        <div className={styles.radio}>
-          <p>课程类型</p>
-          <div>
-            <span>All</span>
-            {
-              typeList.map((item, index) => {
-                return <span key={index} className={item.flag ? styles.active : ''} >{item.title}</span>
-              })
-            }
-          </div>
-        </div>
-        <div className={styles.select}>
-          <div>
-            <p>考试类型</p>
-            <div>
-              <Select defaultValue="lucy" style={{ width: 220 }} onChange={handleChange}>
-                <Option value="jack">Jack</Option>
-                <Option value="lucy">Lucy</Option>
-                <Option value="Yiminghe">yiminghe</Option>
-              </Select>
-            </div>
-          </div>
-          <div>
-            <p>题目类型</p>
-            <div>
-              <Select defaultValue="lucy" style={{ width: 220 }} onChange={handleChange}>
-                <Option value="jack">Jack</Option>
-                <Option value="lucy">Lucy</Option>
-                <Option value="Yiminghe">yiminghe</Option>
-              </Select>
-            </div>
-          </div>
-          <div className={styles.find}>
-            <p>查询</p>
-          </div>
-        </div>
-      </div>
-      <div className={styles.content}>
-        <div className={styles.box}>
-           <p>机器人归位</p>
-           <div>
-             <span>代码补全</span>
-             <span>JavaScript上</span>
-             <span>周考一</span>
-           </div>
-           <p className={styles.name}>dingshaoshan发布</p>
-           <p className={styles.pos}>编辑</p>
-        </div>
-        <div className={styles.box}>
-           <p>机器人归位</p>
-           <div>
-             <span>代码补全</span>
-             <span>JavaScript上</span>
-             <span>周考一</span>
-           </div>
-           <p className={styles.name}>dingshaoshan发布</p>
-           <p className={styles.pos}>编辑</p>
-        </div>
-        <div className={styles.box}>
-           <p>机器人归位</p>
-           <div>
-             <span>代码补全</span>
-             <span>JavaScript上</span>
-             <span>周考一</span>
-           </div>
-           <p className={styles.name}>dingshaoshan发布</p>
-           <p className={styles.pos}>编辑</p>
-        </div>
-      </div>
-    </div>
+	console.log(props.examTypeList)
+	useEffect(() => {
+		props.subject()
+		props.examType()
+		props.getQuestions()
+		props.question()
 
-  );
+	}, []);
+	function clcikFind() {
+		props.find({ exam_id: "wbxm4-jf8q6k-lvt2ca-ze96mg" })
+
+	}
+	console.log(props.questionList)
+	return (
+		<div className={styles.wrap}>
+			<div className={styles.top}>
+				<h2>查看试题</h2>
+			</div>
+			<div className={styles.head}>
+				<div className={styles.radio}>
+					<p>课程类型</p>
+					<div className={styles.subject}>
+						<span>All</span>
+						<Radio.Group onChange={onChange} defaultValue="a">
+							{
+								props.subjectList.map((item, index) => {
+									return <Radio.Button value={item.subject_text} key={index} style={{ margin: ' 0 5px 5px 5px' }}>{item.subject_text}</Radio.Button>
+								})
+							}
+						</Radio.Group>
+						{/* {
+                  props.subjectList.map((item, index) => {
+                    return <span key={index} className={item.flag ? styles.active : ''} >{item.subject_text}</span>
+                  })
+                } */}
+					</div>
+				</div>
+				<div className={styles.select}>
+					<div>
+						<p>考试类型</p>
+						<div>
+							<Select defaultValue="周考一 " style={{ width: 220 }} onChange={handleChange}>
+								{
+									props.examTypeList.map((item, index) => {
+										return <Option value={item.exam_name} key={index}>{item.exam_name}</Option>
+									})
+								}
+							</Select>
+						</div>
+					</div>
+					<div>
+						<p>题目类型</p>
+						<div>
+							<Select defaultValue="简单题" style={{ width: 220 }} onChange={handleChange}>
+								{
+									props.getQuestionsList.map((item, index) => {
+										return <Option value={item.questions_type_text} key={index}>{item.questions_type_text}</Option>
+									})
+								}
+							</Select>
+						</div>
+					</div>
+					<div className={styles.find}>
+						<p onClick={() => clcikFind()}>查询</p>
+					</div>
+				</div>
+			</div>
+			<div className={styles.content}>
+			  {
+				  props.findList.length?(
+					props.findList.map((item, index) => {
+						return <Link to={`/detail/${item.questions_id}`} key={index}>
+							<div className={styles.box}  >
+								<p>{item.title}</p>
+								<div>
+									<span>{item.questions_type_text}</span>
+									<span>{item.subject_text}</span>
+									<span>{item.exam_name}</span>
+								</div>
+								<p className={styles.name}>{item.user_name}发布</p>
+								<p className={styles.pos}>编辑</p>
+							</div>
+						</Link>
+
+					})
+				  ):
+					  props.questionList.map((item, index) => {
+						return <Link to={`/detail/${item.questions_id}`} key={index}>
+									<div className={styles.box}  >
+										<p>{item.title}</p>
+										<div>
+											<span>{item.questions_type_text}</span>
+											<span>{item.subject_text}</span>
+											<span>{item.exam_name}</span>
+										</div>
+										<p className={styles.name}>{item.user_name}发布</p>
+										<p className={styles.pos}>编辑</p>
+									</div>
+					           </Link>
+
+			         	}
+				)
+			  }
+			</div>
+		</div>
+
+	);
 }
 
 IndexPage.propTypes = {
 };
-
-export default connect()(IndexPage);
+const mapStateToProps = state => {
+	return { ...state.subject, ...state.examType, ...state.getQuestions, ...state.question, ...state.find }
+}
+const mapDispatchToPorps = dispatch => {
+	return {
+		subject: payload => {
+			dispatch({
+				type: 'subject/subject',
+				payload
+			})
+		},
+		examType: payload => {
+			dispatch({
+				type: 'examType/examType',
+				payload
+			})
+		},
+		getQuestions: payload => {
+			dispatch({
+				type: 'getQuestions/getQuestions',
+				payload
+			})
+		},
+		question: payload => {
+			dispatch({
+				type: 'question/question',
+				payload
+			})
+		},
+		find: payload => {
+			dispatch({
+				type: 'find/find',
+				payload
+			})
+		}
+	}
+}
+export default connect(mapStateToProps, mapDispatchToPorps)(IndexPage);

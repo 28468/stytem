@@ -1,29 +1,65 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'dva';
 import styles from './IndexPage.css';
-import { Select, Radio } from 'antd';
+import { Select, Radio,Spin } from 'antd';
 import { Link } from "dva/router";
 const { Option } = Select;
-function handleChange(value) {
-	var value1 = `selected ${value}`
-}
+
 function onChange(e) {
 	console.log(`radio checked:${e.target.value}`);
 }
 function IndexPage(props) {
-	console.log(props.examTypeList)
+	// console.log(props.examTypeList)
 	useEffect(() => {
 		props.subject()
 		props.examType()
 		props.getQuestions()
-		props.question()
-
+		props.find()
 	}, []);
+
+	const [data, setDate] = useState('')//考试类型
+	const [data1, setDate1] = useState('')//题目类型
+
+	function handleChange(value) {//考试类型
+		setDate(value)
+	}
+
+	function handleChange1(value) {//题目类型
+		setDate1(value)
+	}
+	var examType = ''
+	var question = ''
+	props.examTypeList.forEach((item) => {//考试类型
+		if (item.exam_name == data) {
+			examType = item.exam_id
+		}
+	})
+	props.getQuestionsList.forEach((item) => {//题目类型
+		if (item.questions_type_text == data1) {
+			question = item.questions_type_id
+		}
+	})
+
+	console.log(examType, question)
 	function clcikFind() {
-		props.find({ exam_id: "wbxm4-jf8q6k-lvt2ca-ze96mg" })
+		if (examType == '') {
+			props.find({ questions_type_id: question })
+		}
+	   if (question == '') {
+			props.find({ exam_id: examType })
+		}
+		if (examType == '' && question == '') {
+			props.find({})
+		}
+		else {
+			props.find({ exam_id: examType, questions_type_id: question })
+		}
 
 	}
-	console.log(props.questionList)
+	function goDetail(item){
+	 props.history.push({pathname:`/detail/${item.questions_id}`})
+	}
+	// console.log(props.questionList)
 	return (
 		<div className={styles.wrap}>
 			<div className={styles.top}>
@@ -41,18 +77,13 @@ function IndexPage(props) {
 								})
 							}
 						</Radio.Group>
-						{/* {
-                  props.subjectList.map((item, index) => {
-                    return <span key={index} className={item.flag ? styles.active : ''} >{item.subject_text}</span>
-                  })
-                } */}
 					</div>
 				</div>
 				<div className={styles.select}>
 					<div>
 						<p>考试类型</p>
-						<div>
-							<Select defaultValue="周考一 " style={{ width: 220 }} onChange={handleChange}>
+						<div className={styles.selectType}>
+							<Select defaultValue="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" style={{ width: 220 }} onChange={handleChange}>
 								{
 									props.examTypeList.map((item, index) => {
 										return <Option value={item.exam_name} key={index}>{item.exam_name}</Option>
@@ -64,7 +95,7 @@ function IndexPage(props) {
 					<div>
 						<p>题目类型</p>
 						<div>
-							<Select defaultValue="简单题" style={{ width: 220 }} onChange={handleChange}>
+							<Select defaultValue="" style={{ width: 220 }} onChange={handleChange1}>
 								{
 									props.getQuestionsList.map((item, index) => {
 										return <Option value={item.questions_type_text} key={index}>{item.questions_type_text}</Option>
@@ -75,46 +106,33 @@ function IndexPage(props) {
 					</div>
 					<div className={styles.find}>
 						<p onClick={() => clcikFind()}>查询</p>
+						
 					</div>
 				</div>
 			</div>
 			<div className={styles.content}>
-			  {
-				  props.findList.length?(
-					props.findList.map((item, index) => {
-						return <Link to={`/detail/${item.questions_id}`} key={index}>
-							<div className={styles.box}  >
-								<p>{item.title}</p>
-								<div>
-									<span>{item.questions_type_text}</span>
-									<span>{item.subject_text}</span>
-									<span>{item.exam_name}</span>
-								</div>
-								<p className={styles.name}>{item.user_name}发布</p>
-								<p className={styles.pos}>编辑</p>
-							</div>
-						</Link>
+				{
+					props.findList.length ? (
+						props.findList.map((item, index) => {
+							return 	<div  key={index} className={styles.box}>
+								       <div  onClick={()=>goDetail(item)} >
+											<p>{item.title}</p>
+											<div>
+												<span>{item.questions_type_text}</span>
+												<span>{item.subject_text}</span>
+												<span>{item.exam_name}</span>
+											</div>
+											<p className={styles.name}>{item.user_name}发布</p>										
+									    </div>
+									     <Link to={`/compile/${item.questions_id}`} className={styles.pos}>编辑</Link>
+							       </div>
 
-					})
-				  ):
-					  props.questionList.map((item, index) => {
-						return <Link to={`/detail/${item.questions_id}`} key={index}>
-									<div className={styles.box}  >
-										<p>{item.title}</p>
-										<div>
-											<span>{item.questions_type_text}</span>
-											<span>{item.subject_text}</span>
-											<span>{item.exam_name}</span>
-										</div>
-										<p className={styles.name}>{item.user_name}发布</p>
-										<p className={styles.pos}>编辑</p>
-									</div>
-					           </Link>
+						})
+					) : <div>没有数据</div>
 
-			         	}
-				)
-			  }
+				}
 			</div>
+			{props.global ? <div className={styles.loading}><Spin /></div> : null}
 		</div>
 
 	);
@@ -123,7 +141,7 @@ function IndexPage(props) {
 IndexPage.propTypes = {
 };
 const mapStateToProps = state => {
-	return { ...state.subject, ...state.examType, ...state.getQuestions, ...state.question, ...state.find }
+	return { ...state.subject, ...state.examType, ...state.getQuestions, ...state.question, ...state.find,global: state.loading.global }
 }
 const mapDispatchToPorps = dispatch => {
 	return {

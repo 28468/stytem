@@ -14,6 +14,7 @@ import Classroom from './Class/Classroom'
 import Students from './Class/Students'
 import WaitClass from './Read/waitClass'
 import Detail from '../index/Question/seeQuestion/detail'
+import Compile from '../index/Question/seeQuestion/compile/IndexPage'
 import { Layout, Menu, Icon } from "antd";
 const { Content,  Sider } = Layout;
 const { SubMenu } = Menu;
@@ -28,7 +29,7 @@ function IndexPage() {
         />
       </div>
       <Layout style={{ minHeight: "90vh" }}>
-        <Sider>
+        <Sider className='left'>
           <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
             <SubMenu
               key="sub1"
@@ -116,7 +117,7 @@ function IndexPage() {
             </SubMenu>
           </Menu>
         </Sider>
-        <Layout>
+        <Layout className='right'> 
           <Content style={{ margin: "0 16px" }}>
               <Switch>
                 <Route path="/addQuestion" component={AddPage} />
@@ -131,6 +132,7 @@ function IndexPage() {
                 <Route path="/students" component={Students} />
                 <Route path="/waitClass" component={WaitClass} />
                 <Route path="/detail/:id" component={Detail} />
+                <Route path="/compile/:id" component={Compile} />
               </Switch>     
           </Content>
         </Layout>

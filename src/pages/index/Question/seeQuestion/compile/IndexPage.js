@@ -7,32 +7,40 @@ const { confirm } = Modal;
 const { Option } = Select;
 
 function IndexPage(props) {
+     console.log(props)
   useEffect(() => {
     props.subject()
     props.examType()
     props.getQuestions()
+    props.question()
   }, []);
+ var questions_id = ''
+  props.questionList.forEach((item) => {
+    if (item.questions_id == props.match.params.id) {
+      questions_id  = item.questions_id
+    }
+  })
+console.log(questions_id)
   function submit() {
     confirm({
-      title: "你要添加吗?",
-      content: "您确定要添加吗",
+      title: "你要修改吗?",
+      content: "您确定要修改吗",
       okText: "确定",
       cancelText: "取消",
       onOk() {
-
         props.form.validateFields((err, values) => {
           if (!err) {
-            props.addQuestion({
-              questions_type_id: topic, questions_stem: values.content,
+            props.updata({
+              questions_type_id: topic,
+              questions_stem: values.content,
               subject_id: question,
               exam_id: examType,
-              user_id: "axg8t2-oroeja",
+              questions_id: questions_id,
               questions_answer: values.result,
               title: values.title
             })
           }
         });
-
       },
       onCancel() {
       }
@@ -73,7 +81,7 @@ function IndexPage(props) {
     <div className={styles.wrap}>
       <Form>
         <div className={styles.top}>
-          <h2>添加试题</h2>
+          <h2>编辑试题</h2>
         </div>
         <div className={styles.content}>
           <div className={styles.pading_show}>
@@ -149,7 +157,7 @@ function IndexPage(props) {
 IndexPage.propTypes = {
 };
 const mapStateToProps = state => {
-  return { ...state.subject, ...state.examType, ...state.getQuestions, ...state.addQuestion }
+  return { ...state.subject, ...state.examType, ...state.getQuestions, ...state.updata,...state.question }
 }
 const mapDispatchToPorps = dispatch => {
   return {
@@ -170,14 +178,18 @@ const mapDispatchToPorps = dispatch => {
         type: 'getQuestions/getQuestions',
         payload
       })
-    }
-    ,
-    addQuestion: payload => {
+    },
+    question: payload => {
       dispatch({
-        type: 'addQuestion/addQuestion',
+        type: 'question/question',
         payload
       })
-
+    },
+    updata: payload => {
+      dispatch({
+        type: 'updata/updata',
+        payload
+      })
     }
   }
 }

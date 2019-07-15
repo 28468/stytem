@@ -6,9 +6,9 @@ export default {
 
   // 模块的状态
   state: {
-    addQuestionList:[]
+    addQuestionCode:-1
   },
-
+  
   // 异步操作
   effects: {
     *addQuestion({ payload}, {call, put}){
@@ -16,7 +16,7 @@ export default {
           console.log(data)
    yield put({
         type: 'addQuestions',
-        payload: data.data
+        payload: data.code==1?1:-1
       })
     }
   },
@@ -24,7 +24,7 @@ export default {
   // 同步操作
   reducers: {
     addQuestions(state, action) {
-      return { ...state, addTypeList: action.payload };
+      return { ...state, addQuestionCode: action.payload };
     },
   },
 

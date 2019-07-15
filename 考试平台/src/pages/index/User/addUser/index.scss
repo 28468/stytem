@@ -1,0 +1,25 @@
+
+:global{
+    .form{
+        width:33.3%;
+        border:1px solid #ccc;
+        padding:10px 0 0 10px;
+        box-sizing: border-box;
+        .ant-form-item-children{
+            display: flex;
+            width: 185px;
+            height: 32px;
+        }
+    }
+    .buttons{
+      border: 0;
+     width: 112px;
+     height: 32px;
+     font-size: 14px!important;
+     color: #fff!important;
+     background: linear-gradient(-90deg,#4e75ff,#0139fd)!important;
+    }
+    .set{
+        margin-left: 25px;
+    }
+}

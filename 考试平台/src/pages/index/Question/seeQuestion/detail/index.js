@@ -7,7 +7,7 @@ function IndexPage(props) {
     props.question()
   }, []);
   let list = []
-  props.questionList.forEach((item, index) => {
+  props.questionList.forEach((item) => {
     if (item.questions_id == props.match.params.id) {
       list.push(item)
     }
@@ -57,10 +57,6 @@ function IndexPage(props) {
             </div>
           })
         }
-
-      //
-
-
     </div>
   );
 }

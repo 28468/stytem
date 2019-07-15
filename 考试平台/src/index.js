@@ -1,9 +1,10 @@
 import dva from 'dva';
 import './index.css';
 import 'antd/dist/antd.css'
+import createLoading from 'dva-loading'
 // 1. Initialize
 const app = dva();
-
+app.use(createLoading())
 // 2. Plugins
 // app.use({});
 
@@ -16,6 +17,7 @@ app.model(require('./models/question').default);//获取所有的试题
 app.model(require('./models/addType').default);//添加试题类型
 app.model(require('./models/addQuestion').default);//添加试题
 app.model(require('./models/find').default);//按条件获取试题
+app.model(require('./models/updata').default);//更新
 // 4. Router
 app.router(require('./router').default);
 

@@ -1,134 +1,255 @@
-import React from 'react';
-import { connect } from 'dva';
-import styles from './index.css';
-import { Select } from 'antd';
-import { Link } from "dva/router";
-const { Option } = Select;
-function IndexPage(props) {
-  console.log(props)
-  return (
-    <div className={styles.normal}>
-      <div className={styles.top}>
-        <h2>添加用户</h2>
-      </div>
-      <div className={styles.list_box}>
-      <div className={styles.list_child}>
-      <div  className={styles.list_childs}>
-          <span>添加用户</span>
-          <span>更新用户</span>
-        </div>
-        <div className={styles.list_input}>
-          <input placeholder="请输入用户名" type="text"/>
-          <input placeholder="请输入密码" type="text"/>
-          <Select className={styles.selects} defaultValue="周考一" style={{ width: 150 }}>
-              <Option value="">周考一</Option>
-            </Select>
-        </div>
-        <div className={styles.buttonBtn}>
-          <button  className={styles.button}>确定</button> <button  className={styles.button_server}>重置</button>
-        </div>
-      </div>
-     
-      </div>
-      <div className={styles.list_box}>
-      <div className={styles.list_child}>
-      <div  className={styles.list_childs}>
-          <span>添加用户</span>
+import React, { useEffect } from 'react';
+import { Form, Input, Button, Radio, Select, Tabs } from 'antd';
+import './index.scss';
+import { connect } from 'dva'
 
-        </div>
-        <div className={styles.list_input}>
-          <input placeholder="请输入用户名" type="text"/>
-          <input placeholder="请输入密码" type="text"/>
-          <Select className={styles.selects} defaultValue="周考一" style={{ width: 150 }}>
-              <Option value="">周考一</Option>
-            </Select>
-        </div>
-        <div className={styles.buttonBtn}>
-          <button  className={styles.button}>确定</button> <button  className={styles.button_server}>重置</button>
-        </div>
-      </div>
-     
-      </div>
-      <div className={styles.list_box}>
-      <div className={styles.list_child}>
-      <div  className={styles.list_childs}>
-          <span>添加用户</span>
-          <span>更新用户</span>
-        </div>
-        <div className={styles.list_input}>
-          <input placeholder="请输入用户名" type="text"/>
-          <input placeholder="请输入密码" type="text"/>
-          <Select className={styles.selects} defaultValue="周考一" style={{ width: 150 }}>
-              <Option value="">周考一</Option>
-            </Select>
-        </div>
-        <div className={styles.buttonBtn}>
-          <button  className={styles.button}>确定</button> <button  className={styles.button_server}>重置</button>
-        </div>
-      </div>
-     
-      </div>
-      <div className={styles.list_box}>
-      <div className={styles.list_child}>
-      <div  className={styles.list_childs}>
-          <span>添加用户</span>
-          <span>更新用户</span>
-        </div>
-        <div className={styles.list_input}>
-          <input placeholder="请输入用户名" type="text"/>
-          <input placeholder="请输入密码" type="text"/>
-          <Select className={styles.selects} defaultValue="周考一" style={{ width: 150 }}>
-              <Option value="">周考一</Option>
-            </Select>
-        </div>
-        <div className={styles.buttonBtn}>
-          <button  className={styles.button}>确定</button> <button  className={styles.button_server}>重置</button>
-        </div>
-      </div>
-     
-      </div>
-      <div className={styles.list_box}>
-      <div className={styles.list_child}>
-      <div  className={styles.list_childs}>
-          <span>添加用户</span>
-          <span>更新用户</span>
-        </div>
-        <div className={styles.list_input}>
-          <input placeholder="请输入用户名" type="text"/>
-          <input placeholder="请输入密码" type="text"/>
-          <Select className={styles.selects} defaultValue="周考一" style={{ width: 150 }}>
-              <Option value="">周考一</Option>
-            </Select>
-        </div>
-        <div className={styles.buttonBtn}>
-          <button  className={styles.button}>确定</button> <button  className={styles.button_server}>重置</button>
-        </div>
-      </div>
-     
-      </div>
-      <div className={styles.list_box}>
-      <div className={styles.list_child}>
-      <div  className={styles.list_childs}>
-          <span>添加用户</span>
-          <span>更新用户</span>
-        </div>
-        <div className={styles.list_input}>
-          <input placeholder="请输入用户名" type="text"/>
-          <input placeholder="请输入密码" type="text"/>
-          <Select className={styles.selects} defaultValue="周考一" style={{ width: 150 }}>
-              <Option value="">周考一</Option>
-            </Select>
-        </div>
-        <div className={styles.buttonBtn}>
-          <button  className={styles.button}>确定</button> <button  className={styles.button_server}>重置</button>
-        </div>
-      </div>
-     
+const { Option } = Select;
+const { TabPane } = Tabs;
+
+function handleChange(value) {
+  console.log(`selected ${value}`);
+}
+
+function Adduser(props) {
+  const { getFieldDecorator } = props.form
+  return (
+    <div className="content" style={{ padding: '15px' }}>
+      <h1 className="title"><h2>添加试题</h2></h1>
+      <div style={{ display: 'flex', flexWrap: "wrap" }} >
+        <Form className="form" labelCol={{ span: 5 }} wrapperCol={{ span: 12 }}  >
+          <Tabs type="card" >
+            <TabPane tab={`添加用户`} key='1'>
+              <Form.Item>
+                {getFieldDecorator('user_name', {
+                  // rules: [{ required: true, message: 'Please input your note!' }],
+                  initialValue: ''
+                })(<Input placeholder="请输入用户名" />)}
+              </Form.Item>
+              <Form.Item >
+                {getFieldDecorator('user_pwd', {
+                  // rules: [{ required: true, message: 'Please input your note!' }],
+                  initialValue: ''
+                })(<Input placeholder="请输入密码" />)}
+              </Form.Item>
+              <Form.Item>
+                {getFieldDecorator('identity_id', {
+                  // rules: [{ required: true, message: 'Please select your gender!' }],
+                  initialValue: '请选择身份id'
+                })(
+                  <Select defaultValue="lucy" style={{ width: 120 }} onChange={handleChange}>
+                  <Option value="jack">Jack</Option>
+                </Select>
+                )}
+              </Form.Item>
+              <Form.Item >
+                <Button type="primary" htmlType="submit" className="buttons">确定</Button>
+                <Button className="set">重置</Button>
+              </Form.Item>
+            </TabPane>
+            <TabPane tab={`更新用户`} key='2'>
+              <Form.Item>
+                {getFieldDecorator('user_name', {
+                  // rules: [{ required: true, message: 'Please select your gender!' }],
+                  initialValue: undefined
+                })(
+                  <Select
+                    placeholder="请选择身份id"
+                  >
+                 
+                  </Select>
+                )}
+              </Form.Item>
+              <Form.Item>
+                {getFieldDecorator('user_name', {
+                  // rules: [{ required: true, message: 'Please input your note!' }],
+                  initialValue: undefined
+                })(<Input placeholder="请输入用户名" />)}
+              </Form.Item>
+              <Form.Item >
+                {getFieldDecorator('user_pwd', {
+                  // rules: [{ required: true, message: 'Please input your note!' }],
+                  initialValue: undefined
+                })(<Input placeholder="请输入密码" />)}
+              </Form.Item>
+              <Form.Item>
+                {getFieldDecorator('identity_id', {
+                  // rules: [{ required: false, message: 'Please select your gender!' }],
+                  initialValue: undefined
+                })(
+                  <Select
+                    placeholder="请选择身份id"
+                  >
+                   
+                  </Select>
+                )}
+              </Form.Item>
+              <Form.Item  >
+                <Button type="primary" htmlType="submit"className="buttons" >确定</Button>
+                <Button className="set" >重置</Button>
+              </Form.Item>
+            </TabPane>
+          </Tabs>
+        </Form>
+        <Form className="form" labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} >
+          <Form.Item >
+            <Radio.Group defaultValue="identity_text" >
+              <Radio.Button value="identity_text">添加身份</Radio.Button>
+            </Radio.Group>
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('identity_text', {
+              // rules: [{ required: true, message: 'Please input your note!' }],
+              initialValue: undefined
+            })(<Input placeholder="请输入身份名称" />)}
+          </Form.Item>
+          <Form.Item >
+            <Button type="primary" htmlType="submit" className="buttons">确定</Button>
+            <Button className="set" >重置</Button>
+          </Form.Item>
+        </Form>
+
+        <Form className="form" labelCol={{ span: 5 }} wrapperCol={{ span: 12 }}  >
+          <Form.Item >
+            <Radio.Group defaultValue="vertical" >
+              <Radio.Button value="vertical">添加api接口</Radio.Button>
+            </Radio.Group>
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('api_authority_text', {
+              // rules: [{ required: true, message: 'Please input your note!' }],
+              initialValue: undefined
+            })(<Input placeholder="请输入api接口权限名称" />)}
+          </Form.Item>
+          <Form.Item >
+            {getFieldDecorator('api_authority_url', {
+              // rules: [{ required: true, message: 'Please input your note!' }],
+              initialValue: undefined
+            })(<Input placeholder="请输入api接口权限url" />)}
+          </Form.Item>
+          <Form.Item >
+            {getFieldDecorator('api_authority_method', {
+              // rules: [{ required: true, message: 'Please input your note!' }],
+              initialValue: undefined
+            })(<Input placeholder="请输入api接口权限方法" />)}
+          </Form.Item>
+          <Form.Item >
+            <Button type="primary" htmlType="submit"className="buttons" >确定</Button>
+            <Button className="set" >重置</Button>
+          </Form.Item>
+        </Form>
+
+        <Form className="form" labelCol={{ span: 5 }} wrapperCol={{ span: 12 }}  >
+          <Form.Item >
+            <Radio.Group defaultValue="vertical" >
+              <Radio.Button value="vertical">添加视图接口权限</Radio.Button>
+            </Radio.Group>
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('view_authority_text', {
+              // rules: [{ required: true, message: 'Please select your gender!' }],
+              initialValue: undefined
+            })(
+              <Select
+                placeholder="请选择已有视图"
+              // onChange={this.handleSelectChange}
+              >
+              
+              </Select>
+            )}
+          </Form.Item>
+          <Form.Item  >
+            <Button type="primary" htmlType="submit"className="buttons" >确定</Button>
+            <Button className="set">重置</Button>
+          </Form.Item>
+        </Form>
+
+        <Form className="form" labelCol={{ span: 5 }} wrapperCol={{ span: 12 }}  >
+          <Form.Item >
+            <Radio.Group defaultValue="vertical" >
+              <Radio.Button value="vertical">给身份设置api接口权限</Radio.Button>
+            </Radio.Group>
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('identity_id', {
+              // rules: [{ required: true, message: 'Please select your gender!' }],
+              initialValue: undefined
+            })(
+              <Select
+                placeholder="请选择身份id"
+              // onChange={this.handleSelectChange}
+              >
+             
+              </Select>
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('api_authority_id', {
+              // rules: [{ required: true, message: 'Please select your gender!' }],
+              initialValue: undefined
+            })(
+              <Select
+                placeholder="请选择api接口权限"
+              // onChange={this.handleSelectChange}
+              >
+              
+              </Select>
+            )}
+          </Form.Item>
+          <Form.Item >
+            <Button type="primary" htmlType="submit"className="buttons" >确定</Button>
+            <Button className="set" >重置</Button>
+          </Form.Item>
+        </Form>
+        <Form className="form" labelCol={{ span: 5 }} wrapperCol={{ span: 12 }} >
+          <Form.Item >
+            <Radio.Group defaultValue="vertical" >
+              <Radio.Button value="vertical">给身份设置视图权限</Radio.Button>
+            </Radio.Group>
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('identity_id', {
+              // rules: [{ required: true, message: 'Please select your gender!' }],
+              initialValue: undefined
+            })(
+              <Select
+                placeholder="请选择身份id"
+              // onChange={this.handleSelectChange}
+              >
+               
+              </Select>
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('view_authority_id', {
+              // rules: [{ required: true, message: 'Please select your gender!' }],
+              initialValue: undefined
+            })(
+              <Select
+                placeholder="请选择视图权限id"
+              // onChange={this.handleSelectChange}
+              >
+               
+              </Select>
+            )}
+          </Form.Item>
+          <Form.Item  >
+            <Button type="primary" htmlType="submit" className="buttons" >确定</Button>
+            <Button className="set">重置</Button>
+          </Form.Item>
+        </Form>
       </div>
     </div>
   );
 }
-IndexPage.propTypes = {
-};
 
-export default connect()(IndexPage);
+
+const mapStateToProps = state => {
+  return {
+    ...state
+  }
+}
+const mapDispatchToProps = dispatch => {
+ 
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(Adduser))

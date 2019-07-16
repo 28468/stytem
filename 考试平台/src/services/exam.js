@@ -9,11 +9,11 @@ export function createExam(params) {
 }
 //删除试卷
 export function delTestList(params) {
+
     return request({
         url: `/exam/exam/${params}`,
-        method: 'DELETE',
-        
-    })
+        method: 'DELETE'
+    }) 
 }
 //获取试卷列表
 export function getTestList() {

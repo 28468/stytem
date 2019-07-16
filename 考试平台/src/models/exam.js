@@ -30,8 +30,9 @@ export default {
         },
         //删除试卷
         *delTestList({ payload }, { call, put }) {
+            
             let data = yield call(delTestList, payload);
-            console.log('del', data);
+            console.log('del222222', data);
             yield put({
                 type: 'delTests',
                 payload: data.code === 1 ? 1 : -1

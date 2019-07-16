@@ -1,25 +1,26 @@
 import React from "react";
 import { connect } from "dva";
 import "./IndexPage.scss";
-import { Switch, Route, NavLink } from "dva/router";
-import AddPage from "./Question/addQuestion/IndexPage";
-import ClassPage from "./Question/classQuestion/IndexPage";
-import SeePage from "./Question/seeQuestion/IndexPage";
-import AddUser from './User/addUser'
-import UserShow from './User/userShow'
-import AddExam from './Exam/addExam'
-import ExamList from './Exam/ExamList'
-import Class from './Class/Class'
-import Classroom from './Class/Classroom'
-import Students from './Class/Students'
-import WaitClass from './Read/waitClass'
-import Detail from '../index/Question/seeQuestion/detail'
-import Compile from '../index/Question/seeQuestion/compile/IndexPage'
+import { NavLink } from "dva/router";
+import {MapRoute} from '../../routes'
+// import AddPage from "./Question/addQuestion/IndexPage";
+// import ClassPage from "./Question/classQuestion/IndexPage";
+// import SeePage from "./Question/seeQuestion/IndexPage";
+// import AddUser from './User/addUser'
+// import UserShow from './User/userShow'
+// import AddExam from './Exam/addExam'
+// import ExamList from './Exam/ExamList'
+// import Class from './Class/Class'
+// import Classroom from './Class/Classroom'
+// import Students from './Class/Students'
+// import WaitClass from './Read/waitClass'
+// import Detail from '../index/Question/seeQuestion/detail'
+// import Compile from '../index/Question/seeQuestion/compile/IndexPage'
 import { Layout, Menu, Icon } from "antd";
 const { Content,  Sider } = Layout;
 const { SubMenu } = Menu;
 
-function IndexPage() {
+function IndexPage(props) {
   return (
     <div>
       <div className="icon">
@@ -119,7 +120,7 @@ function IndexPage() {
         </Sider>
         <Layout className='right'> 
           <Content style={{ margin: "0 16px" }}>
-              <Switch>
+              {/* <Switch>
                 <Route path="/addQuestion" component={AddPage} />
                 <Route path="/questionClass" component={ClassPage} />
                 <Route path="/lookQuestion" component={SeePage} />
@@ -133,7 +134,8 @@ function IndexPage() {
                 <Route path="/waitClass" component={WaitClass} />
                 <Route path="/detail/:id" component={Detail} />
                 <Route path="/compile/:id" component={Compile} />
-              </Switch>     
+              </Switch>      */}
+               <MapRoute route={props.route}></MapRoute>
           </Content>
         </Layout>
       </Layout>

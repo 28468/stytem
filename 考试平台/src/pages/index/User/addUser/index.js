@@ -5,11 +5,9 @@ import { connect } from 'dva'
 
 const { Option } = Select;
 const { TabPane } = Tabs;
-
 function handleChange(value) {
   console.log(`selected ${value}`);
 }
-
 function Adduser(props) {
   const { getFieldDecorator } = props.form
   return (
@@ -37,8 +35,8 @@ function Adduser(props) {
                   initialValue: '请选择身份id'
                 })(
                   <Select defaultValue="lucy" style={{ width: 120 }} onChange={handleChange}>
-                  <Option value="jack">Jack</Option>
-                </Select>
+                    <Option value="jack">Jack</Option>
+                  </Select>
                 )}
               </Form.Item>
               <Form.Item >
@@ -55,7 +53,7 @@ function Adduser(props) {
                   <Select
                     placeholder="请选择身份id"
                   >
-                 
+
                   </Select>
                 )}
               </Form.Item>
@@ -79,12 +77,12 @@ function Adduser(props) {
                   <Select
                     placeholder="请选择身份id"
                   >
-                   
+
                   </Select>
                 )}
               </Form.Item>
               <Form.Item  >
-                <Button type="primary" htmlType="submit"className="buttons" >确定</Button>
+                <Button type="primary" htmlType="submit" className="buttons" >确定</Button>
                 <Button className="set" >重置</Button>
               </Form.Item>
             </TabPane>
@@ -133,7 +131,7 @@ function Adduser(props) {
             })(<Input placeholder="请输入api接口权限方法" />)}
           </Form.Item>
           <Form.Item >
-            <Button type="primary" htmlType="submit"className="buttons" >确定</Button>
+            <Button type="primary" htmlType="submit" className="buttons" >确定</Button>
             <Button className="set" >重置</Button>
           </Form.Item>
         </Form>
@@ -153,12 +151,12 @@ function Adduser(props) {
                 placeholder="请选择已有视图"
               // onChange={this.handleSelectChange}
               >
-              
+
               </Select>
             )}
           </Form.Item>
           <Form.Item  >
-            <Button type="primary" htmlType="submit"className="buttons" >确定</Button>
+            <Button type="primary" htmlType="submit" className="buttons" >确定</Button>
             <Button className="set">重置</Button>
           </Form.Item>
         </Form>
@@ -178,7 +176,7 @@ function Adduser(props) {
                 placeholder="请选择身份id"
               // onChange={this.handleSelectChange}
               >
-             
+
               </Select>
             )}
           </Form.Item>
@@ -191,12 +189,12 @@ function Adduser(props) {
                 placeholder="请选择api接口权限"
               // onChange={this.handleSelectChange}
               >
-              
+
               </Select>
             )}
           </Form.Item>
           <Form.Item >
-            <Button type="primary" htmlType="submit"className="buttons" >确定</Button>
+            <Button type="primary" htmlType="submit" className="buttons" >确定</Button>
             <Button className="set" >重置</Button>
           </Form.Item>
         </Form>
@@ -215,7 +213,7 @@ function Adduser(props) {
                 placeholder="请选择身份id"
               // onChange={this.handleSelectChange}
               >
-               
+
               </Select>
             )}
           </Form.Item>
@@ -228,7 +226,7 @@ function Adduser(props) {
                 placeholder="请选择视图权限id"
               // onChange={this.handleSelectChange}
               >
-               
+
               </Select>
             )}
           </Form.Item>
@@ -249,7 +247,7 @@ const mapStateToProps = state => {
   }
 }
 const mapDispatchToProps = dispatch => {
- 
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(Adduser))

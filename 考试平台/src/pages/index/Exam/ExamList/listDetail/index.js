@@ -8,8 +8,6 @@ function IndexPage(props) {
      props.getQuestion(props.location.search.slice(4))
       }, []) 
       console.log(props.examDetailList.questions)
-      
-
     return (
         <div className={styles.normal}>
             <div className={styles.head}>

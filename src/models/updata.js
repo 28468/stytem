@@ -17,7 +17,7 @@ export default {
       console.log(data)
       yield put({
         type: 'updatas',
-        payload: data.code==1?1:-1
+        payload: data.code===1?1:-1
       })
     }
   },

@@ -11,9 +11,9 @@ export default {
 
   // 异步操作
   effects: {
-    *examType({}, {call, put}){
+    *examType({payload}, {call, put}){
    
-      let data = yield call(examType);
+      let data = yield call(examType,payload);
       yield put({
         type: 'examTypes',
         payload: data.data

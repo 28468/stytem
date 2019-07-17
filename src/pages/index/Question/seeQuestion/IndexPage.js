@@ -30,25 +30,25 @@ function IndexPage(props) {
 	var examType = ''
 	var question = ''
 	props.examTypeList.forEach((item) => {//考试类型
-		if (item.exam_name == data) {
+		if (item.exam_name === data) {
 			examType = item.exam_id
 		}
 	})
 	props.getQuestionsList.forEach((item) => {//题目类型
-		if (item.questions_type_text == data1) {
+		if (item.questions_type_text === data1) {
 			question = item.questions_type_id
 		}
 	})
 
 	console.log(examType, question)
 	function clcikFind() {
-		if (examType == '') {
+		if (examType === '') {
 			props.find({ questions_type_id: question })
 		}
-	   if (question == '') {
+	   if (question === '') {
 			props.find({ exam_id: examType })
 		}
-		if (examType == '' && question == '') {
+		if (examType === '' && question === '') {
 			props.find({})
 		}
 		else {

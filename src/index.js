@@ -18,6 +18,10 @@ app.model(require('./models/addType').default);//添加试题类型
 app.model(require('./models/addQuestion').default);//添加试题
 app.model(require('./models/find').default);//按条件获取试题
 app.model(require('./models/updata').default);//更新
+app.model(require('./models/exam').default);//考试管理这一大块
+app.model(require('./models/global').default);//国际语言
+app.model(require('./models/adduser').default);//添加用户
+app.model(require('./models/userData').default);//用户信息渲染
 // 4. Router
 app.router(require('./router').default);
 

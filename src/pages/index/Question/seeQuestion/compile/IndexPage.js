@@ -16,7 +16,7 @@ function IndexPage(props) {
   }, []);
  var questions_id = ''
   props.questionList.forEach((item) => {
-    if (item.questions_id == props.match.params.id) {
+    if (item.questions_id === props.match.params.id) {
       questions_id  = item.questions_id
     }
   })
@@ -63,17 +63,17 @@ console.log(questions_id)
   var question = ''
   var topic = ''
   props.examTypeList.forEach((item) => {//考试类型
-    if (item.exam_name == data1) {
+    if (item.exam_name === data1) {
       examType = item.exam_id
     }
   })
   props.subjectList.forEach((item) => {//课程类型
-    if (item.subject_text == data2) {
+    if (item.subject_text === data2) {
       question = item.subject_id
     }
   })
   props.getQuestionsList.forEach((item) => {//课程类型
-    if (item.questions_type_text == data3) {
+    if (item.questions_type_text === data3) {
       topic = item.questions_type_id
     }
   })

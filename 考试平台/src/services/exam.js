@@ -11,7 +11,7 @@ export function createExam(params) {
 export function delTestList(params) {
 
     return request({
-        url: `/exam/exam/${params}`,
+        url: `/exam/exam/w5tcy-g2dts`,
         method: 'DELETE'
     }) 
 }

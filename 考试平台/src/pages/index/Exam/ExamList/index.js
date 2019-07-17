@@ -35,7 +35,7 @@ function IndexPage(props) {
   const columns = [
     { title: '试卷信息', 
       dataIndex: 'title', 
-      key: 10,
+      key: 'title',
       render: (tags,obj) => {
         return <div>
                   <h4>{tags}</h4>
@@ -45,7 +45,7 @@ function IndexPage(props) {
     },
     { title: '班级', 
       dataIndex: 'grade_name', 
-      key: 11 ,
+      key: 'grade_name' ,
       render: tags => (
               <div>
                   <h4>考试班级</h4>
@@ -60,7 +60,7 @@ function IndexPage(props) {
     { title: '创建人', dataIndex: 'user_name', key: 2 },
     { title: '开始时间', 
       dataIndex: 'start_time',
-      key: 13 ,
+      key: 'start_time' ,
       render: (item) => {
                 return <div>
                     <p>{new Date(item*1).toLocaleDateString()}&nbsp;&nbsp;{new Date(item*1).toLocaleTimeString()}</p>            
@@ -69,13 +69,13 @@ function IndexPage(props) {
     },
     { title: '结束时间',
       dataIndex: 'end_time',
-      key: 14, 
+      key: 'end_time', 
       render: (item) => {return <div><span>{new Date(item*1).toLocaleString()}</span></div> }
     },
     {
       title: 'Action',
       dataIndex: '',
-      key: 15,
+      key: 'Action',
       render: (item) =>  <Link to={{ pathname: `/listDetail`, search: `id=${item.exam_exam_id}` }}>详情</Link>
     },
   ];
@@ -88,8 +88,8 @@ function IndexPage(props) {
           <span>考试类型:</span>
           <Select style={{ width: '60%', marginLeft: '20px' }} >
             {
-              props.examTypeList && props.examTypeList.map((item,index) => {
-                return <Option key={index} value={item.exam_id}>{item.exam_name}</Option>
+              props.examTypeList && props.examTypeList.map((item) => {
+                return <Option key={item.exam_id} value={item.exam_id}>{item.exam_name}</Option>
               }
               )
             }
@@ -99,8 +99,8 @@ function IndexPage(props) {
           <span>课程:</span>
           <Select style={{ width: '60%', marginLeft: '20px' }}>
             {
-              props.subjectList && props.subjectList.map((item,index) => {
-                return <Option key={index} value={item.subject_id}>{item.subject_text}</Option>
+              props.subjectList && props.subjectList.map((item) => {
+                return <Option key={item.subject_id} value={item.subject_id}>{item.subject_text}</Option>
               }
               )
             }

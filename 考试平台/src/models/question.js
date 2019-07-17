@@ -11,9 +11,9 @@ export default {
 
   // 异步操作
   effects: {
-    *question({}, {call, put}){
+    *question({payload}, {call, put}){
    
-      let data = yield call(question);
+      let data = yield call(question,payload);
       yield put({
         type: 'questions',
         payload: data.data

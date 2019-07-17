@@ -3,9 +3,7 @@ import { connect } from 'dva';
 import { Form, Input, Select, InputNumber, DatePicker, Button } from 'antd';
 import styles from './index.scss';
 
-const InputGroup = Input.Group;
 const { Option } = Select;
-const { RangePicker } = DatePicker;
 
 function Addexam(props) {
 	useEffect(() => {

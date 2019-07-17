@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'dva';
 import { Link } from "dva/router";
 import { Modal,message } from 'antd';
@@ -6,9 +6,6 @@ import styles from './index.css';
 const { confirm } = Modal;
 function IndexPage(props) {
 
-	// useEffect(() => {
-	//     props.createExam();
-	//   }, [])
 	let exam_exam_id = props.createTestList.exam_exam_id
 	console.log(exam_exam_id)
 	function del(id) {
@@ -20,7 +17,7 @@ function IndexPage(props) {
 			onOk() {
 		   //删除试卷
 		   props.delTestList(id);
-		   if(props.del==1){
+		   if(props.del===1){
 			message.success('删除成功');
 		   }else{
 			message.error('删除失败');

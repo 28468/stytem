@@ -10,4 +10,7 @@ export* from './updata'
 export * from './exam.js';
 export * from './user';
 export * from './userData';
+export * from './class';
+export * from './userInfo';
+
 

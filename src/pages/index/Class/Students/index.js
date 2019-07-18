@@ -1,17 +1,143 @@
-import React from 'react';
-import { connect } from 'dva';
-import styles from './index.css';
-
-function IndexPage(props) {
-  console.log(props)
-  return (
-    <div className={styles.normal}>
-      学生管理
-    </div>
-  );
+import React,{useEffect} from 'react'
+import { Button , Table, Select , Form , Input } from 'antd'
+import { connect } from 'dva'
+import studentStyle from './index.scss' 
+function Student(props){
+    let { getFieldDecorator} = props.form
+    let { getClassData , getGrade , getStudet , getGradeViewData ,getClassRoomDataS, getStudentDatas } = props
+    useEffect(()=>{
+        getClassData();
+        getGrade();
+        getStudet();     
+    },[])
+ console.log(props)
+    const { Option } = Select;
+    let remoteStudents=(text)=>{
+        let { remoteStudent } = props;
+        remoteStudent(text)
+    }
+    const columns = [
+        {
+          title: '姓名',
+          dataIndex: 'student_name',
+          key: 'name',
+          render: text => <span>{text}</span>,
+        },
+        {
+          title: '学号',
+          dataIndex: 'student_id',
+          key: 'age',
+        },
+        {
+          title: '班级',
+          dataIndex: 'grade_name',
+          key: 'address',
+        },
+        {
+          title: '教室',
+          key: 'tags',
+          dataIndex: 'room_text'
+        },
+        {
+          title: '密码',
+          key: 'action',
+          dataIndex: 'student_pwd'
+        },
+        {
+          title: '操作',
+          key: 'detail',
+          render: (text, record) => (
+            <span>
+              <a onClick={()=>{remoteStudents(text)}}>删除</a>
+            </span>
+          ),
+        },
+      ];
+      
+    const search=(type)=>{
+        if(type==='submit'){
+            props.form.validateFields((err, values) => {
+                // console.log('values...',values)
+                props.filterStudentData(values)
+            })
+        }else{
+            props.form.resetFields()
+        }
+    }
+    let data = getStudentDatas;
+    return (
+        <div className="content">
+            <p className="title">学生管理</p>
+            <div className="main">
+                <div>
+                    <Form className={studentStyle.form} >
+                        <Form.Item>
+                            {getFieldDecorator('studentName',{initialValue:''})(<Input placeholder="学生名" />)}
+                        </Form.Item>
+                        <Form.Item>
+                            {getFieldDecorator('roomName',{initialValue:''})(
+                                <Select placeholder="教室号" style={{width:'150px'}}>
+                                    {
+                                        getClassRoomDataS.map((item,index)=>{
+                                            return  <Option key={item.room_id} value={item.room_text}>{item.room_text}</Option>
+                                        })
+                                    }
+                                </Select>
+                            )}
+                        </Form.Item>
+                        <Form.Item>
+                            {getFieldDecorator('classNames',{initialValue:''})(
+                                <Select placeholder="班级名" style={{width:'150px'}}>
+                                    {
+                                        getGradeViewData.map((item)=>{
+                                            return  <Option key={item.grade_id} value={item.grade_name}>{item.grade_name}</Option>
+                                        })
+                                    }
+                                </Select>
+                            )}
+                        </Form.Item>
+                        <Form.Item style={{display:'flex'}}>
+                            <Button type="primary" onClick={()=>{search('submit')}}>搜索</Button>
+                            <Button type="primary" style={{margin:'0 20px'}} onClick={()=>{search('sub')}}>重置</Button>
+                        </Form.Item>
+                    </Form>
+                </div>
+                <Table columns={columns} dataSource={data} rowKey={idx=>idx.student_id}/>
+            </div>
+        </div>
+    )
 }
-
-IndexPage.propTypes = {
-};
-
-export default connect()(IndexPage);
+const mapStateToProps=(state)=>{
+    // console.log(state.class)
+    return {
+        ...state.class
+    }
+}
+const mapDispatchToprops=(dispatch)=>{
+    return {
+     //添加教室接口
+        getClassData(){
+            dispatch({type:'class/getClassName'})
+        },
+        //添加班级接口
+        getGrade(){
+            dispatch({type:'class/getGradeData'})
+        },
+        //添加学生接口
+        getStudet(){
+            dispatch({type:'class/getStudetS'})
+        },
+        //删除
+        remoteStudent(payload){
+            dispatch({type:'class/remoteS',payload:payload})
+        },
+        //搜索学生
+        filterStudentData(payload){
+            dispatch({
+                type: 'class/filterStudentData',
+                action: payload
+            })
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToprops)(Form.create()(Student))

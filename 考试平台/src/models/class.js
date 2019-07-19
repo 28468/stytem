@@ -3,7 +3,7 @@ import {classGet,classAll,classAdd,classDel,classupdata} from '../services/index
 import { message } from 'antd';
 export default {
   // 命名空间
-  namespace: 'class',
+  namespace: 'classs',
 
   // 模块的状态
   state: {

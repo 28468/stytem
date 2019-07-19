@@ -160,19 +160,19 @@ class IndexPage extends Component {
 
 }
 const mapStateToProps = state => {
-	return { ...state.class,...state.subject }
+	return { ...state.classs,...state.subject }
 }
 const mapDispatchToPorps = dispatch => {
 	return {
 		classGet: payload => {
 			dispatch({
-				type: 'class/classGet',
+				type: 'classs/classGet',
 				payload
 			})
     },
     classAll: payload => {
 			dispatch({
-				type: 'class/classAll',
+				type: 'classs/classAll',
 				payload
 			})
     },
@@ -184,19 +184,19 @@ const mapDispatchToPorps = dispatch => {
     },
     classAdd: payload => {
 			dispatch({
-				type: 'class/classAdd',
+				type: 'classs/classAdd',
 				payload
 			})
     },
     classDel: payload => {
 			dispatch({
-				type: 'class/classDel',
+				type: 'classs/classDel',
 				payload
 			})
     },
     classupdata: payload => {
 			dispatch({
-				type: 'class/classupdata',
+				type: 'classs/classupdata',
 				payload
 			})
     },

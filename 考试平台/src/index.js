@@ -23,6 +23,7 @@ app.model(require('./models/global').default);//国际语言
 app.model(require('./models/adduser').default);//添加用户
 app.model(require('./models/userData').default);//用户信息渲染
 app.model(require('./models/class').default);//教室这一块
+app.model(require('./models/classRoom').default);//教室这一块
 
 // 4. Router
 app.router(require('./router').default);

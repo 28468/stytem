@@ -17,7 +17,8 @@ class IndexPage extends Component {
     this.state = {
       current: 'mail',
       collapsed: false,
-      visible: false
+      visible: false,
+      avatar:''
     };
   }
   handleCancel = e => {
@@ -49,9 +50,7 @@ class IndexPage extends Component {
     let form = new FormData();
     form.append(e.target.files[0].name,e.target.files[0]);
     axios.post('http://123.206.55.50:11000/upload',form).then((res)=>{
-      
-      var imgs = document.querySelector('.imgs')
-      imgs.src=res.data.data[0].path
+    this.props.userUpdata({user_id:this.props.userInfo.user_id,avatar:res.data.data[0].path})
     })
   }
   exitLogin=()=>{
@@ -68,6 +67,7 @@ class IndexPage extends Component {
     });
   }
   render() {
+   
     return (
       <div>
         <div className="icon">
@@ -80,13 +80,14 @@ class IndexPage extends Component {
             <SubMenu
               title={
                 <span className="submenu-title-wrapper">
-                  <img src='http://123.206.55.50:11000/static/Ql9MXhGinz4NneyVmvEa_lvo.jpeg' className='imgs' />
+                  <img   src={this.props.userInfo.avatar} className='imgs' />
                   chenmanjie
             </span>
               }
             >
               <Menu.Item key="setting:1">个人中心</Menu.Item>
-              <Menu.Item key="setting:2" className='btnLang' onClick={() => this.props.changeLocale(this.props.intl.locale === 'en' ? 'zh' : 'en')}>
+              <Menu.Item key="setting:2" className='btnLang' 
+               onClick={() => this.props.changeLocale(this.props.intl.locale === 'en' ? 'zh' : 'en')}>
                 {this.props.intl.locale === 'en' ? '英文' : '中文'}</Menu.Item>
               <Menu.Item key="setting:3" onClick={() => this.Headmodal()}>图片上传</Menu.Item>
               <Menu.Item key="setting:4" onClick={()=>this.exitLogin()}>退出登录</Menu.Item>
@@ -203,9 +204,7 @@ class IndexPage extends Component {
     </div>
     );
   }
-  componentDidMount(){
-    console.log(this.props.userInfo)
-  }
+
  
 }
 
@@ -220,7 +219,13 @@ const mapDispatchToProps = dispatch => {
         type: 'global/updateLocale',
         payload
       })
-    }
+    },
+    userUpdata: payload => {
+			dispatch({
+				type: 'login/userUpdata',
+				payload
+			})
+    },
   }
 }
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(IndexPage));

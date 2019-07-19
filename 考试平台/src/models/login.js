@@ -1,4 +1,4 @@
-import {login,getUserInfo} from '../services/index'
+import {login,getUserInfo,userUpdata} from '../services/index'
 import {setToken, getToken} from '../utils/index'
 import { routerRedux } from 'dva/router';
 export default {
@@ -8,7 +8,8 @@ export default {
   // 模块的状态
   state: {
     isLogin: -1,
-    userInfo: {}
+    userInfo: {},
+    userUpdataCode:-1
   },
 
    // 订阅
@@ -35,11 +36,12 @@ export default {
             }))
           }
         }
-
         // 获取用户信息
+        if (getToken()){
         dispatch({
           type: 'getUserInfo'
         })
+      }
       });
     },
   },
@@ -64,19 +66,26 @@ export default {
         payload: data.code
       })
     },
-    // * getUserInfo(action, {call, put, select}){
-    //   let userInfo = yield select(state=>state.login.userInfo);
-    //   // if (Object.keys(userInfo).length){
-    //   //   return;
-    //   // }
-    //   console.log('userInfo...', userInfo);
-    //   let data = yield getUserInfo();
-    //   console.log('data...', data);
-    //   yield put({
-    //     type: 'updateUserInfo',
-    //     payload: data.data
-    //   })
-    // }
+    * getUserInfo(action, {call, put, select}){
+      let userInfo = yield select(state=>state.login.userInfo);
+      if (Object.keys(userInfo).length){
+        return;
+      }
+      console.log('userInfo...', userInfo);
+      let data = yield getUserInfo();
+      console.log('data...', data);
+      yield put({
+        type: 'updateUserInfo',
+        payload: data.data
+      })
+    },
+    *userUpdata({payload}, {call, put}){
+      let data = yield call(userUpdata,payload);
+      yield put({
+        type: 'userUpdatas',
+        payload: data
+      })
+    },
   },
 
   // 同步操作
@@ -84,10 +93,12 @@ export default {
     updateLogin(state, action) {
       return { ...state, isLogin: action.payload };
     },
-    // updateUserInfo(state, action){
-    //   console.log(action)
-    //   return { ...state, userInfo: action.payload };
-    // }
+    updateUserInfo(state, action){
+      return { ...state, userInfo: action.payload };
+    },
+    userUpdatas(state, action){
+      return { ...state, userUpdataCode: action.payload };
+    }
   },
 
 };

@@ -34,9 +34,6 @@ function IndexPage(props) {
 
                         }
                     </div>
-
-
-
                 </div>
 
             </div>

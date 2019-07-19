@@ -116,7 +116,7 @@ function Adduser(props) {
       key: 'view_id'
     }
   ]
-  console.log(props)
+
   return (
     <div className="content">
       <h1 className="title">用户展示</h1>

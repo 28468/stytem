@@ -28,6 +28,7 @@ export default {
 
   // 异步操作
   effects: {
+    //添加学生接口
     *getStudetS({ payload }, { call, put }) {
       let data = yield call(getStudent)
       yield put({
@@ -35,10 +36,12 @@ export default {
         action: data.data
       })
     },
+    //删除
     *remoteS({ payload }, { call, put }) {
       let data = yield call(remoteStuden, payload);
       data.code === 1 ? message.success(data.msg) : message.error(data.msg)
     },
+
     *getGradeData({ payload }, { call, put }) {
       let data = yield call(getGradeDatas)
       yield put({
@@ -66,6 +69,7 @@ export default {
         action: data.code === 1 ? 1 : -1
       });
     },
+    //获取已经分配教室的班级
     *mangerGrad({ }, { call, put }) {
       let data = yield call(mangerGradGet);
       console.log('add..data...', data)
@@ -74,6 +78,7 @@ export default {
         action: data.data
       });
     },
+    //更新学生信息接口
     *mangerGradeupdate({ payload }, { call, put }) {
       // console.log('payload...',payload)
       let data = yield call(mangerGradeupdateGet, payload)
@@ -83,6 +88,7 @@ export default {
         action: data.code === 1 ? 1 : -1
       });
     },
+
     *mangerdelete({ payload }, { call, put }) {
       // console.log('payload...',payload)
       let data = yield call(mangerdeleteGet, payload)
@@ -119,6 +125,7 @@ export default {
         action: data.data
       });
     },
+         //添加教室接口
     *getClassName({ payload }, { call, put }) {
       let data = yield call(getClassNameData)
       yield put({
@@ -126,7 +133,6 @@ export default {
         action: data.data
       })
     },
-
   },
 
   // 同步操作

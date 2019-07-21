@@ -15,10 +15,20 @@ import LoginPage from "../pages/login/IndexPage";
 import ListPage from "../pages/index/IndexPage";
 import addExamdetail from '../pages/index/Exam/addExam/addExamdetail'
 import ListDetail from '../pages/index/Exam/ExamList/listDetail/index'
+import Errors from '../pages/Other/403'
+import Errorss from '../pages/Other/404'
 const route = [
     {
         path:'/login',
         component:LoginPage,
+    },
+    {
+        path:'/403',
+        component:Errors,
+    },
+    {
+        path:'/404',
+        component:Errorss,
     },
     {
         path:'/',

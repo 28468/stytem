@@ -145,18 +145,18 @@ class IndexPage extends Component {
 	//   console.log(this.props.classAddCode)
 	// }
 
-	//   componentWillReceiveProps(nextProps){
-	//     if (this.props.newprops.classAddCode!== nextProps.classAddCode){
-	//       //在这里我们仍可以通过this.props来获取旧的外部状态
-	//       //通过新旧状态的对比，来决定是否进行其他方法
-	//       if (nextProps.classAddCode){
-	//         this.props.classGet()
-	//       }
-	//     // console.log(newprops.classAddCode,"--=-")
+	  componentWillReceiveProps(nextProps){
+	    if (this.props.classAddCode!== nextProps.classAddCode){
+	      //在这里我们仍可以通过this.props来获取旧的外部状态
+	      //通过新旧状态的对比，来决定是否进行其他方法
+	      if (nextProps.classAddCode){
+	        this.props.classGet()
+	      }
+	    // console.log(newprops.classAddCode,"--=-")
 
-	//   }
+	  }
 
-	// }
+	}
 
 }
 const mapStateToProps = state => {

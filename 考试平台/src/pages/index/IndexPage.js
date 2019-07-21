@@ -51,6 +51,7 @@ class IndexPage extends Component {
     form.append(e.target.files[0].name,e.target.files[0]);
     axios.post('http://123.206.55.50:11000/upload',form).then((res)=>{
     this.props.userUpdata({user_id:this.props.userInfo.user_id,avatar:res.data.data[0].path})
+    this.props.getUserInfo()
     })
   }
   exitLogin=()=>{
@@ -223,6 +224,12 @@ const mapDispatchToProps = dispatch => {
     userUpdata: payload => {
 			dispatch({
 				type: 'login/userUpdata',
+				payload
+			})
+    }
+    ,getUserInfo: payload => {
+			dispatch({
+				type: 'login/getUserInfo',
 				payload
 			})
     },

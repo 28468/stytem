@@ -49,7 +49,7 @@
 <h2>5.项目展示</h2>
 
 ````
-![Image text](https://raw.github.com/yourName/repositpry/master/yourprojectName/img-folder/test.jpg)
 
+![Image text](http://bpic.588ku.com/element_origin_min_pic/16/08/10/1657aaec12e109c.jpg)
 ````
 

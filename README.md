@@ -2,21 +2,31 @@
 <h2>1.项目简介</h2>
 
 ````
-考试管理系统,主要为学生考试而创建的
-
+此项目为考试平台管理系统，有管理员，出题者，和浏览者三个角色，每个角色的路由权限各不相同，是RBAC的典型案例。
 ````
 <h2>2.技术栈</h2>
 
 ````
-"dva","hooks","router","scss","redux",
+主框架为React，结合Dva和hooks的一套较为前潮的模式请求后台的数据。
+大量运用Ant DesiGn的From 和Message  Table 
+结合getFieldDecorator高阶函数实现表单验证
+通过react-intl实现国际化 多语言切换
+使用xlsx 实现Excel导入导出
+````
+<h2>3.项目运行</h2>
 
 ````
-<h2>3.安装说明 </h2>
+# 克隆项目
+git@github.com:28468/stytem.git
 
-````
-1.克隆 git@github.com:28468/stytem.git到本地 
-2.使用npm install 下载依赖包
-3.npm start 启动服务
+# 进入考试平台下载依赖
+npm install
+
+# 启动服务
+npm start 
+
+# 前端项目打包
+npm run build
 ````
 <h2>4.项目结构</h2>
 
@@ -43,6 +53,21 @@
  ├── .gitignore // 不纳入 git 版本控制的 /文件夹?/ 列表
  ├── package.json // 项目信息文件
 └── README.md // 说明
+````
+<h2>5.小结</h2>
 
 ````
+项目简结
+难度：简单
+开发时长：编码两周
+关键字：移动端，出行，可视化，高德地图，Echart图表
+````
+<h2>5.项目截图</h2>
 
+````
+项目简结
+难度：简单
+开发时长：编码两周
+关键字：移动端，出行，可视化，高德地图，Echart图表
+
+````

@@ -20,6 +20,7 @@ import Errorss from '../pages/Other/404'
 const route = [
     {
         path:'/login',
+        view_id: "login",
         component:LoginPage,
     },
     {
@@ -32,55 +33,67 @@ const route = [
     },
     {
         path:'/',
+        view_id: "main",
         component:ListPage,
         children:[
             {
                 path:'/addQuestion',
+                view_id: "main-addQuestions",
                 component:AddPage,
                 
             },
             {
                 path:'/questionClass',
+                view_id: "main-questionsType",
                 component:ClassPage,
             },
             {
                 path:'/lookQuestion',
+                view_id: "main-watchQuestions",
                 component:SeePage
             },
             
             {
                 path:'/addUser',
+                view_id: "main-addUser",
                 component:AddUser
             }
             ,
             {
                 path:'/userShow',
+                view_id: "main-showUser",
                 component:UserShow,
             },
             {
                 path:'/addExam',
+                view_id: "main-addExam",
                 component:AddExam
             },
             {
                 path:'/addExams/addExamdetail',
+                view_id: "main-menu",
                 component:addExamdetail
             },
             {
                 path:'/examList',
+                view_id: "main-examList",
                 component:ExamList
             }
             ,
             {
                 path:'/class',
+                view_id: "main-grade",
                 component:Class
             },
             
             {
                 path:'/classroom',
+                view_id: "main-room",
                 component:Classroom
             },
             {
                 path:'/students',
+                view_id: "main-student",
                 component:Students
             },
             
@@ -90,14 +103,17 @@ const route = [
             },
             {
                 path:'/detail/:id',
+                view_id: "main-questionsDetail",
                 component:Detail
             },
             {
                 path:"/compile/:id",
+                view_id: "main-editQuestions",
                 component:Compile
             },
             {
                 path:'/listDetail',
+                view_id: "main-examDetail",
                 component:ListDetail
             }
         ]

@@ -12,5 +12,6 @@ export * from './user';
 export * from './userData';
 export * from './class';
 export * from './userInfo';
+export * from './quanxian'
 
 

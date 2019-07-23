@@ -124,7 +124,7 @@ function IndexPage(props) {
           
             columns={columns}
             dataSource={props.testList}
-          />
+                />
         </div>
       </div>
     </div>

@@ -9,7 +9,8 @@ export default {
   state: {
     isLogin: -1,
     userInfo: {},
-    userUpdataCode:-1
+    userUpdataCode:-1,
+  
   },
 
    // 订阅
@@ -86,6 +87,8 @@ export default {
         payload: data
       })
     },
+
+   
   },
 
   // 同步操作

@@ -20,6 +20,8 @@ class IndexPage extends Component {
       visible: false,
       avatar:''
     };
+    this.props.quanxian();
+    console.log(this.props.quanxianList)
   }
   handleCancel = e => {
     this.setState({
@@ -68,8 +70,10 @@ class IndexPage extends Component {
     });
   }
   render() {
-   
+    console.log(this.props.myView);
+    console.log(this.props.forbiddenView)
     return (
+      
       <div>
         <div className="icon">
           <img
@@ -205,13 +209,17 @@ class IndexPage extends Component {
     </div>
     );
   }
+ componentDidMount(){
 
+     this.props.quanxian();
+    
+ }
  
 }
 
 IndexPage.propTypes = {};
 const mapStateToProps = state => {
-	return { ...state.login }
+	return { ...state.login,...state.quanxian}
 }
 const mapDispatchToProps = dispatch => {
   return {
@@ -230,6 +238,11 @@ const mapDispatchToProps = dispatch => {
     ,getUserInfo: payload => {
 			dispatch({
 				type: 'login/getUserInfo',
+				payload
+			})
+    },quanxian: payload => {
+			dispatch({
+				type: 'quanxian/quanxian',
 				payload
 			})
     },

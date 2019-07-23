@@ -50,6 +50,6 @@
 
 ````
 
-![Image text](http://bpic.588ku.com/element_origin_min_pic/16/08/10/1657aaec12e109c.jpg)
+
 ````
 
